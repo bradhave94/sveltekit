@@ -40068,32 +40068,4 @@ const data = [
 	}
 ];
 
-function compare(a, b) {
-	if (a.name < b.name) {
-		return -1;
-	}
-	if (a.name > b.name) {
-		return 1;
-	}
-	return 0;
-}
-
-data.sort(compare);
-
-const refiner = [];
-const food = [];
-data.forEach(async function (item) {
-	if (item.recipes) {
-		item.recipes.forEach(async function (r) {
-			if (r.id.includes('REFINERECIPE_')) {
-				refiner.push(r);
-			}
-		});
-	} else {
-		if (item.id.includes('FOOD_')) {
-			food.push(item);
-		}
-	}
-});
-
-export { data, refiner, food };
+export default data;

@@ -1,10 +1,16 @@
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
-	import { data, refiner, food } from './_nmsdata.js';
+	import { data, refiner, food } from './_sortdata.js';
 
 	// see https://kit.svelte.dev/docs#loading
 	export const load: Load = async ({ page }) => {
-		let item = data.find(p => p.id === page.params.id);
+		const id = page.params.id
+		let item
+		if (id.includes('REFINERECIPE_'))
+			item = refiner.find(p => p.id === page.params.id);
+		else
+			item = data.find(p => p.id === page.params.id);
+
 		return {
 			props: { item }
 		};
@@ -12,6 +18,7 @@
 </script>
 
 <script lang="ts">
+
 	export let item;
 </script>
 
